@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -15,8 +17,60 @@
     border-radius: 100vh;
 }
 
+.bar {
+    display: flex;
+    height: 2px;
+    width: 75%;
+    border-radius: 100vh;
+    margin: 0 auto;
+}
+
 .gradient {
     background: #daae51; /* fallback for old browsers */
     background: -webkit-linear-gradient(90deg, #d53369 0%, #daae51 100%); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(90deg, #d53369 0%, #daae51 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.blockquote {
+    padding: 60px 80px 40px;
+    position: relative;
+}
+.blockquote p {
+    font-family: "Great Vibes", cursive;
+    font-size: 96px;
+    font-weight: 700px;
+    text-align: center;
+}
+
+.blockquote span {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 400px;
+    font-style: italic;
+    opacity: 0.8;
+    text-align: right;
+    display: block;
+    margin-top: -20px;
+    padding-right: 8%;
+}
+
+.blockquote:before {
+    position: absolute;
+    font-family: 'FontAwesome';
+    top: -50;
+    margin-top: -12.5%;
+    margin-left: -2.5%;
+    content:"\201C";
+    font-size: 200px;
+    color: rgba(0,0,0,0.2); 
+}
+
+.blockquote::after {
+    content: "";
+    left: 50%;
+    margin-left: -100px;
+    position: absolute;
+    border-bottom: 3px solid #1e40af;
+    height: 3px;
+    width: 200px;
 }

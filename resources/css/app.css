@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.corps{
-    min-height: 90vh;
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #644709;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #daae51;
+    border-radius: 100vh;
+}
+
+.gradient {
+    background: #daae51; /* fallback for old browsers */
+    background: -webkit-linear-gradient(90deg, #d53369 0%, #daae51 100%); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

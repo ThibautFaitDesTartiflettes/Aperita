@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home')->with('cocktails', file_get_contents(storage_path('app/public/cocktails.json')));
 });

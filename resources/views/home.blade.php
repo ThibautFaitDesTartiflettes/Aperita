@@ -23,15 +23,15 @@
         </div>
         <!-- Content -->
         <section class="text-gray-900 body-font bg-stone-100">
-            <div class="container mx-auto flex px-5 pb-6 md:flex-row flex-col items-center">
+            <div class="container mx-auto flex px-5 pb-8 md:flex-row flex-col items-center">
                 <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
                     <blockquote class="blockquote">
                         <p>Shaken, not stirred.</p>
                         <span>James bond</span>
                     </blockquote>
                     <p class="pl-10 pr-32 leading-relaxed font-normal text-gray-900">
-                        Looking for a drink to get you through the day? Look no further! We have a wide variety of drinks to choose from. 
-                        From the classics to the new and exciting. We have it all. You can search for a drink by name, or by ingredient. 
+                        Looking for a drink to get you through the day? Look no further! Aperita is here to help you find the perfect drink for you, 
+                        from the classics to the new and exciting. We have it all. You can search for a drink by name, or by ingredient. 
                         You can select ingredients that you have at home and we will show you what drinks you can make with them. 
                         We also have a random drink generator, so if you are feeling adventurous, you can let us choose for you!
                         Have a nice drink!
@@ -46,6 +46,47 @@
         <div class="bg-stone-100">
             <div class="bar bg-stone-400"></div>
         </div>
+
+        <section class="text-gray-900 body-font bg-stone-100 pb-5">
+            <div class="container px-5 pt-24 mx-auto">
+                <div class="text-center">
+                    <h1 class="sm:text-6xl text-4xl font-medium text-gray-900 mb-4" style="font-family: 'Great Vibes', cursive;">Let's get started !</h1>
+                    <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">
+                        Enter the name of a cocktail, a letter or selected the ingredients you have at 
+                        home and we will show you what you can make! Or if you are not in the mood, 
+                        just click the random button and we will provide you a random cocktail!
+                    </p>
+                    <div class="flex mt-6 justify-center">
+                        <div class="w-32 h-[3px] rounded-full bg-blue-800 inline-flex"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap mx-12 mt-8">
+                @foreach (json_decode($cocktails, true) as $cocktail)
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center bg-stone-200 border-gray-300 border p-4 rounded-lg">
+                        <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="img/list_cocktail.svg">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">{{ $cocktail['name'] }}</h2>
+                            <p class="text-gray-500">{{ $cocktail['glass'] }}</p>
+                        </div>
+                        <a href="#">
+                            <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            class="p-2 w-16 h-16 object-cover object-center flex-shrink-0 bg-stone-300
+                                        border border-gray-400 hover:ring hover:ring-opacity-40 hover:ring-blue-800 rounded-lg 
+                                        duration-300 ease-in-out float-right hover:text-blue-800">
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M4.5 1C4.22386 1 4 1.22386 4 1.5C4 1.77614 4.22386 2 4.5 2H12V13H4.5C4.22386 13 4 13.2239 4 13.5C4 13.7761 4.22386 14 4.5 14H12C12.5523 14 13 13.5523 13 13V2C13 1.44772 12.5523 1 12 1H4.5ZM6.60355 4.89645C6.40829 4.70118 6.09171 4.70118 5.89645 4.89645C5.70118 5.09171 5.70118 5.40829 5.89645 5.60355L7.29289 7H0.5C0.223858 7 0 7.22386 0 7.5C0 7.77614 0.223858 8 0.5 8H7.29289L5.89645 9.39645C5.70118 9.59171 5.70118 9.90829 5.89645 10.1036C6.09171 10.2988 6.40829 10.2988 6.60355 10.1036L8.85355 7.85355C9.04882 7.65829 9.04882 7.34171 8.85355 7.14645L6.60355 4.89645Z"
+                                    fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </section>
 
         <!-- End content -->
         <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -64,5 +105,22 @@
                 </g>
             </g>
         </svg>
+
+        <!-- <script>
+            var name = 'bloody mary'
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.api-ninjas.com/v1/cocktail?name=' + name,
+                headers: { 'X-Api-Key': '226S4O8bs3Me60uuGe0m+A==uD37mNN5wkuUqmms'},
+                contentType: 'application/json',
+                success: function(result) {
+                    console.log(result);
+                },
+                error: function ajaxError(jqXHR) {
+                    console.error('Error: ', jqXHR.responseText);
+                }
+            });
+        </script> -->
+
     </body>
 @endsection

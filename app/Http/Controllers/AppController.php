@@ -27,4 +27,27 @@ class AppController extends Controller
 
         return $data;
     }
+
+    static function selectGlass($glass) {
+        switch ($glass) {
+            case 'highball':
+                return 'highball';
+            case 'collins':
+                return 'highball';
+            case 'old-fashioned':
+                return 'old-fashioned';
+            case 'shot':
+                return 'old-fashioned';
+            case 'champagne-flute':
+                return 'champagne-flute';
+            case 'champagne-tulip':
+                return 'champagne-flute';
+            case 'martini':
+                return 'martini';
+            case 'white-wine':
+                return 'wine';
+            default:
+                return 'martini';
+        }
+    }
 }

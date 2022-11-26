@@ -62,13 +62,13 @@
                 </div>
             </div>
             <div class="flex flex-wrap mx-12 mt-8">
-                @foreach (json_decode($cocktails, true) as $cocktail)
+                @foreach ($cocktails as $cocktail)
                 <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
                     <div class="h-full flex items-center bg-stone-200 border-gray-300 border p-4 rounded-lg">
                         <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="img/list_cocktail.svg">
                         <div class="flex-grow">
-                            <h2 class="text-gray-900 title-font font-medium">{{ $cocktail['name'] }}</h2>
-                            <p class="text-gray-500">{{ $cocktail['glass'] }}</p>
+                            <h2 class="text-gray-900 font-semibold">{{ $cocktail['name'] }}</h2>
+                            <p class="text-gray-500 italic">{{ isset($cocktail['category']) ? $cocktail['category'] : 'No category' }}</p>
                         </div>
                         <a href="#">
                             <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"

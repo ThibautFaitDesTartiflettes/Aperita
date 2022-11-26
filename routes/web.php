@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home')->with('cocktails', file_get_contents(storage_path('app/public/cocktails.json')));
-});
+Route::get('/', [AppController::class, 'index'])->name('home');

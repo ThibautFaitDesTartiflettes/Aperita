@@ -110,10 +110,10 @@
                                                         @if (isset($ingredient['amount']) && isset($ingredient['unit']) && isset($ingredient['ingredient']))
                                                             <li class="text-gray-800 mb-1">
                                                                 {{ $ingredient['amount'] }} {{ $ingredient['unit'] }} of {{ $ingredient['ingredient'] }} 
-                                                                <span class="italic">{{ isset($ingredient['label']) ? '(Label '.$ingredient['label'].')' : '' }}</span>
+                                                                <span class="italic">{{ isset($ingredient['label']) ? '('.$ingredient['label'].')' : '' }}</span>
                                                             </li>
                                                         @elseif (isset($ingredient['special']))
-                                                            <li class="text-gray-800 mb-1"><span class="italic font-semibold mr-2">The chef's touch : </span> {{ $ingredient['special'] }}</li>
+                                                            <li class="text-gray-800 mb-1">{{ $ingredient['special'] }}</li>
                                                         @endif
                                                     @endforeach
                                                 </ul>

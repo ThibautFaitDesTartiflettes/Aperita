@@ -29,7 +29,7 @@
                         <p>Shaken, not stirred.</p>
                         <span>James bond</span>
                     </blockquote>
-                    <p class="pl-10 pr-32 leading-relaxed font-normal text-gray-900">
+                    <p class="pl-10 lg:pr-32 leading-relaxed font-normal text-gray-900">
                         Looking for a drink to get you through the day? Look no further! Aperita is here to help you find the perfect drink for you, 
                         from the classics to the new and exciting. We have it all. You can search for a drink by name, or by ingredient. 
                         You can select ingredients that you have at home and we will show you what drinks you can make with them. 
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-wrap mx-12 mt-8">
+            <div class="flex flex-wrap mx-2 lg:mx-12 mt-8">
                 @foreach ($cocktails as $id => $cocktail)
                 <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
                     <div class="h-full flex items-center bg-stone-200 border-gray-300 border p-4 rounded-lg">
@@ -71,11 +71,11 @@
                             <h2 class="text-gray-900 font-semibold">{{ $cocktail['name'] }}</h2>
                             <p class="text-gray-500 italic">{{ isset($cocktail['category']) ? $cocktail['category'] : 'No category' }}</p>
                         </div>
-                        <a href="#modal{{ $id }}">
+                        <a href="#modal{{ $id }}" class="pl-2">
                             <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
                             class="p-2 w-16 h-16 object-cover object-center flex-shrink-0 bg-stone-300
                                         border border-gray-400 hover:ring hover:ring-opacity-40 hover:ring-blue-800 rounded-lg 
-                                        duration-300 ease-in-out float-right hover:text-blue-800">
+                                        duration-300 ease-in-out hover:text-blue-800">
                                 <path
                                     fill-rule="evenodd"
                                     clip-rule="evenodd"

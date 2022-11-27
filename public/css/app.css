@@ -532,6 +532,10 @@ video {
   margin-left: 3rem;
   margin-right: 3rem;
 }
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
 .-mt-12 {
   margin-top: -3rem;
 }
@@ -782,6 +786,9 @@ video {
 }
 .pl-6 {
   padding-left: 1.5rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
 }
 .text-center {
   text-align: center;
@@ -1185,6 +1192,11 @@ input[type="checkbox"] {
 }
 @media (min-width: 1024px) {
 
+  .lg\:mx-12 {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
   .lg\:-mt-24 {
     margin-top: -6rem;
   }
@@ -1215,6 +1227,10 @@ input[type="checkbox"] {
 
   .lg\:pr-24 {
     padding-right: 6rem;
+  }
+
+  .lg\:pr-32 {
+    padding-right: 8rem;
   }
 
   .lg\:text-3xl {

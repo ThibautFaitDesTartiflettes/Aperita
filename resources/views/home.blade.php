@@ -91,18 +91,18 @@
                                             bg-blue-800 rounded-full hover:bg-blue-900 duration-300 ease-in-out" href="#browse">X</a>
                                 <div>
                                     <div class="flex flex-wrap -m-4 px-2">
-                                        <div class="p-4 md:w-1/3 w-full">
-                                            <img alt="team" class="w-full h-full bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mb-4" 
+                                        <div class="p-4 md:w-1/3 w-full flex items-center justify-center">
+                                            <img alt="team" class="w-32 h-32 md:w-full lg:h-full bg-gray-100 object-cover object-center flex-shrink-0 rounded-full" 
                                                 src="img/glass/{{ App\Http\Controllers\AppController::selectGlass($cocktail['glass']) }}.svg">
                                         </div>
-                                        <div class="p-4 md:w-1/3 w-full">
-                                            <div class="h-full border-gray-300 border-r rounded flex flex-col items-center justify-center">
+                                        <div class="p-4 md:w-1/3 w-full border-gray-300 border-b md:border-r md:border-b-0">
+                                            <div class="h-full flex flex-col items-center justify-center">
                                                 <h1 class="text-gray-900 text-6xl font-semibold" style="font-family: 'Great Vibes', cursive;">{{ $cocktail['name'] }}</h1>
                                                 <h2 class="text-gray-900 italic opacity-75 -mt-2 mb-4">{{ isset($cocktail['category']) ? $cocktail['category'] : '' }}</h2>
                                                 <p class="leading-relaxed text-base mb-5">{{ ucfirst($cocktail['glass']) }} glass</p>
                                             </div>
                                         </div>
-                                        <div class="p-4 md:w-1/3 w-full">
+                                        <div class="p-4 md:w-1/3 w-full md:pl-6">
                                             <div class="h-full pt-2">
                                                 <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Ingredients :</h2>
                                                 <ul class="list-disc list-inside ml-5 mb-5">

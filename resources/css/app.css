@@ -97,6 +97,7 @@
 
 [id^="modal"]:target {
     display: block;
+    height: 100%;
 }
 input[type="checkbox"] {
     position: absolute;

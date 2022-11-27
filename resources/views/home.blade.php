@@ -23,13 +23,13 @@
         </div>
         <!-- Content -->
         <section class="text-gray-900 body-font bg-stone-100">
-            <div class="container mx-auto flex px-5 pb-8 md:flex-row flex-col items-center">
+            <div class="container mx-auto flex px-5 pb-8 md:flex-row flex-col items-center justify-content">
                 <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
                     <blockquote class="blockquote">
                         <p>Shaken, not stirred.</p>
                         <span>James bond</span>
                     </blockquote>
-                    <p class="pl-10 lg:pr-32 leading-relaxed font-normal text-gray-900">
+                    <p class="lg:px-5 lg:text-center xl:px-auto xl:text-left leading-relaxed font-normal text-gray-900">
                         Looking for a drink to get you through the day? Look no further! Aperita is here to help you find the perfect drink for you, 
                         from the classics to the new and exciting. We have it all. You can search for a drink by name, or by ingredient. 
                         You can select ingredients that you have at home and we will show you what drinks you can make with them. 

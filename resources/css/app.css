@@ -135,3 +135,18 @@ input[type="checkbox"] {
     top: 16px;
     right: 26px;
 }
+
+@media screen and (max-width: 768px) {
+    .blockquote {
+        padding: 60px 20px 40px;
+    }
+
+    .blockquote p {
+        font-size: 46px;
+    }
+
+    .blockquote:before {
+        font-size: 100px;
+        margin-left: -50%;
+    }
+}

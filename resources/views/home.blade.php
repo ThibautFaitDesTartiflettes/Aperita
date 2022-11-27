@@ -47,7 +47,7 @@
             <div class="bar bg-stone-400"></div>
         </div>
 
-        <section class="text-gray-900 body-font bg-stone-100 pb-5">
+        <section class="text-gray-900 body-font bg-stone-100 pb-5" id="browse">
             <div class="container px-5 pt-24 mx-auto">
                 <div class="text-center">
                     <h1 class="sm:text-6xl text-4xl font-medium text-gray-900 mb-4" style="font-family: 'Great Vibes', cursive;">Let's get started !</h1>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="flex flex-wrap mx-12 mt-8">
-                @foreach ($cocktails as $cocktail)
+                @foreach ($cocktails as $id => $cocktail)
                 <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
                     <div class="h-full flex items-center bg-stone-200 border-gray-300 border p-4 rounded-lg">
                         <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" 
@@ -71,7 +71,7 @@
                             <h2 class="text-gray-900 font-semibold">{{ $cocktail['name'] }}</h2>
                             <p class="text-gray-500 italic">{{ isset($cocktail['category']) ? $cocktail['category'] : 'No category' }}</p>
                         </div>
-                        <a href="#">
+                        <a href="#modal{{ $id }}">
                             <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
                             class="p-2 w-16 h-16 object-cover object-center flex-shrink-0 bg-stone-300
                                         border border-gray-400 hover:ring hover:ring-opacity-40 hover:ring-blue-800 rounded-lg 
@@ -83,6 +83,56 @@
                                     fill="currentColor"/>
                             </svg>
                         </a>
+                        <!-- The Modal -->
+                        <div class="popup" id="modal{{ $id }}">
+                            <a class="popup__overlay" href="#browse"></a>
+                            <div class="popup__wrapper">
+                                <a class="popup__close w-10 h-10 flex items-center justify-center text-white 
+                                            bg-blue-800 rounded-full hover:bg-blue-900 duration-300 ease-in-out" href="#browse">X</a>
+                                <div>
+                                    <div class="flex flex-wrap -m-4 px-2">
+                                        <div class="p-4 md:w-1/3 w-full">
+                                            <img alt="team" class="w-full h-full bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mb-4" 
+                                                src="img/glass/{{ App\Http\Controllers\AppController::selectGlass($cocktail['glass']) }}.svg">
+                                        </div>
+                                        <div class="p-4 md:w-1/3 w-full">
+                                            <div class="h-full border-gray-300 border-r rounded flex flex-col items-center justify-center">
+                                                <h1 class="text-gray-900 text-6xl font-semibold" style="font-family: 'Great Vibes', cursive;">{{ $cocktail['name'] }}</h1>
+                                                <h2 class="text-gray-900 italic opacity-75 -mt-2 mb-4">{{ isset($cocktail['category']) ? $cocktail['category'] : '' }}</h2>
+                                                <p class="leading-relaxed text-base mb-5">{{ ucfirst($cocktail['glass']) }} glass</p>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 md:w-1/3 w-full">
+                                            <div class="h-full pt-2">
+                                                <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Ingredients :</h2>
+                                                <ul class="list-disc list-inside ml-5 mb-5">
+                                                    @foreach ($cocktail['ingredients'] as $ingredient)
+                                                        @if (isset($ingredient['amount']) && isset($ingredient['unit']) && isset($ingredient['ingredient']))
+                                                            <li class="text-gray-800 mb-1">
+                                                                {{ $ingredient['amount'] }} {{ $ingredient['unit'] }} of {{ $ingredient['ingredient'] }} 
+                                                                <span class="italic">{{ isset($ingredient['label']) ? '(Label '.$ingredient['label'].')' : '' }}</span>
+                                                            </li>
+                                                        @elseif (isset($ingredient['special']))
+                                                            <li class="text-gray-800 mb-1"><span class="italic font-semibold mr-2">The chef's touch : </span> {{ $ingredient['special'] }}</li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                                @if (isset($cocktail['garnish']))
+                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Garnish :</h2>
+                                                    <ul class="list-disc list-inside ml-5 mb-5">
+                                                        <li class="text-gray-800 mb-1">{{ $cocktail['garnish'] }}</li>
+                                                    </ul>
+                                                @endif
+                                                @if (isset($cocktail['preparation']))
+                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Preparation :</h2>
+                                                    <p class="leading-relaxed text-base mb-5">{{ $cocktail['preparation'] }}</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @endforeach

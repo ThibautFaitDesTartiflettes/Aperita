@@ -86,7 +86,7 @@
                         <!-- The Modal -->
                         <div class="popup" id="modal{{ $id }}">
                             <a class="popup__overlay" href="#browse"></a>
-                            <div class="popup__wrapper flex items-center justify-center h-[98%] overflow-y-auto">
+                            <div class="popup__wrapper flex items-center justify-center h-[98%] lg:h-3/4 overflow-y-auto">
                                 <a class="popup__close w-10 h-10 flex items-center justify-center text-white 
                                             bg-blue-800 rounded-full hover:bg-blue-900 duration-300 ease-in-out" href="#browse">X</a>
                                 <div>

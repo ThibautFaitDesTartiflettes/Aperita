@@ -1180,10 +1180,6 @@ input[type="checkbox"] {
     padding-right: 4rem;
   }
 
-  .md\:pl-10 {
-    padding-left: 2.5rem;
-  }
-
   .md\:pl-6 {
     padding-left: 1.5rem;
   }
@@ -1206,6 +1202,18 @@ input[type="checkbox"] {
 
   .lg\:h-full {
     height: 100%;
+  }
+
+  .lg\:h-auto {
+    height: auto;
+  }
+
+  .lg\:h-1\/2 {
+    height: 50%;
+  }
+
+  .lg\:h-3\/4 {
+    height: 75%;
   }
 
   .lg\:w-full {
@@ -1235,10 +1243,6 @@ input[type="checkbox"] {
 
   .lg\:pr-24 {
     padding-right: 6rem;
-  }
-
-  .lg\:pr-32 {
-    padding-right: 8rem;
   }
 
   .lg\:text-center {

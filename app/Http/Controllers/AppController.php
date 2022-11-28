@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isNull;
+use Illuminate\Http\Client\Request as ClientRequest;
 
 class AppController extends Controller
 {
     public function index()
     {
         $cocktails = $this->sortJson(storage_path('app/public/cocktails.json'), 'name');
-        return view('home', compact('cocktails'));
+        $categories = array_unique(array_column($cocktails, 'category'));
+        return view('home', compact('cocktails', 'categories'));
     }
 
     public function sortJson($path, $member = null)

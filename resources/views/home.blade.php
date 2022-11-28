@@ -79,6 +79,8 @@
                         </svg>    
                         <span class="pl-2">Search</span>
                     </button>
+                    <div class="bg-gray-300 w-[3px] h-5/6 rounded-full mx-10"></div>
+                    <button type="button" onclick="javascript:window.location.href='#modal' + Math.floor(Math.random()*77)" class="text-white bg-gradient-to-br from-[#d53369] to-[#daae51] font-medium rounded-lg text-sm px-5 py-3 text-center">Random drink</button>
                 </form>
             </div>
             <div class="flex flex-wrap mx-2 lg:mx-12 mt-8">
@@ -106,7 +108,7 @@
                         <!-- The Modal -->
                         <div class="popup" id="modal{{ $id }}">
                             <a class="popup__overlay" href="#browse"></a>
-                            <div class="popup__wrapper flex items-center justify-center h-[98%] lg:h-3/4 overflow-y-auto">
+                            <div class="popup__wrapper flex items-center justify-center h-[98%] lg:h-4/5 overflow-y-auto">
                                 <a class="popup__close w-10 h-10 flex items-center justify-center text-white 
                                             bg-blue-800 rounded-full hover:bg-blue-900 duration-300 ease-in-out" href="#browse">X</a>
                                 <div>

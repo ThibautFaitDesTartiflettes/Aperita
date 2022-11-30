@@ -16,3 +16,5 @@ use App\Http\Controllers\AppController;
 
 Route::get('/', [AppController::class, 'index'])->name('home');
 Route::post('search', [AppController::class, 'search'])->name('search');
+
+Route::get('legal-notice', [AppController::class, 'legalNotice'])->name('legal-notice');

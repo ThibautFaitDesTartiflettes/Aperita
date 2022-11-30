@@ -2,7 +2,7 @@
     <div class="container px-6 py-3 flex justify-between items-center">
         <div class="flex items-center justify-between">
             <div>
-                <a class="text-2xl font-bold text-gray-800 transition-colors duration-300 transform lg:text-3xl hover:text-gray-700" href="#">
+                <a href="{{ route('home') }}" class="text-2xl font-bold text-gray-800 transition-colors duration-300 transform lg:text-3xl hover:text-gray-700" href="#">
                     <img class="w-10 h-10 scale-150" src="img/logo.png" alt="Logo">
                 </a>
             </div>

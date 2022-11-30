@@ -16,6 +16,11 @@ class AppController extends Controller
         return view('home', compact('cocktails', 'categories'));
     }
 
+    public function legalNotice()
+    {
+        return view('legal-notice');
+    }
+
     public function sortJson($path, $member = null)
     {
         $data = json_decode(file_get_contents($path), true);

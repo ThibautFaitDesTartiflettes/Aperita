@@ -61,8 +61,8 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full px-24 pt-10 flex items-center justify-center">
-                <form method="POST" class="w-full h-16 flex items-center justify-center">
+            <div class="w-full px-24 pt-10 flex flex-col items-center justify-center">
+                <form method="POST" class="w-full h-16 flex flex-wrap items-center justify-center">
                     @csrf
                     <div class="bg-white rounded border border-gray-400 mr-3">
                         <select name="categories" class="w-64 text-center rounded-l-lg py-2 focus:ring-blue-800 focus:ring duration-300 ease-in-out">
@@ -70,8 +70,20 @@
                         @foreach ($categories as $category)
                             <option value="{{ $category }}" class="block px-4 py-2 text-gray-800">{{ $category }}</option>
                         @endforeach
+                            <option value="No category" class="block px-4 py-2 text-gray-800">No category</option>
                         </select>
                         <input type="search" name="name" class="w-96 rounded-r-lg border-l border-gray-400 py-1.5 px-5 focus:ring-blue-800 focus:ring duration-300 ease-in-out" placeholder="Name of the cocktail">
+                    </div>
+                    <div class="checkbox-dropdown mr-3">
+                        Choose ingredient(s)
+                        <ul name="ingredients" class="checkbox-dropdown-list">
+                            @foreach ($ingredients as $ingredient)
+                            <li class="flex items-center border-b border-gray-400">
+                                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                <label for="check" class="w-full">{{ $ingredient }}</label>
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
                     <button type="submit" class="flex justify-center items-center text-gray-50 bg-blue-700 rounded-lg px-4 py-[0.45rem] hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 duration-300 ease-in-out">
                         <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -178,6 +190,16 @@
                 </g>
             </g>
         </svg>
+
+        <script>
+            $(".checkbox-dropdown").click(function () {
+                $(this).toggleClass("is-active");
+            });
+
+            $(".checkbox-dropdown ul").click(function(e) {
+                e.stopPropagation();
+            });
+        </script>
         
         <!-- <script>
             var name = 'bloody mary'

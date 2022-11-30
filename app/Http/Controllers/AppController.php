@@ -13,7 +13,8 @@ class AppController extends Controller
     {
         $cocktails = $this->sortJson(storage_path('app/public/cocktails.json'), 'name');
         $categories = array_unique(array_column($cocktails, 'category'));
-        return view('home', compact('cocktails', 'categories'));
+        $ingredients = $this->getIngredients($cocktails);
+        return view('home', compact('cocktails', 'categories', 'ingredients'));
     }
 
     public function sortJson($path, $member = null)
@@ -28,6 +29,19 @@ class AppController extends Controller
         }
 
         return $data;
+    }
+
+    public function getIngredients($cocktails)
+    {
+        $ingredients = [];
+        foreach ($cocktails as $cocktail) {
+            foreach ($cocktail['ingredients'] as $ingredient) {
+                if (isset($ingredient['ingredient'])) {
+                    $ingredients[] = $ingredient['ingredient'];
+                }
+            }
+        }
+        return array_unique($ingredients);
     }
 
     static function selectGlass($glass) {

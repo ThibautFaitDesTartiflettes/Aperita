@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full px-5 h-auto lg:px-24 pt-10 flex items-center justify-center">
+            <div class="w-full px-5 h-auto lg:px-24 pt-10 flex flex-col md:flex-row items-center justify-center">
                 <form action="{{ route('search') }}" method="POST" class="w-full flex flex-col md:flex-row items-center justify-center">
                     @csrf
                     <div class="w-full bg-white rounded border border-gray-400 md:mr-3 flex flex-col items-center justify-center md:flex-row">

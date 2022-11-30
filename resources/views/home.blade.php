@@ -62,11 +62,11 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full px-24 pt-10 flex flex-col items-center justify-center">
-                <form action="{{ route('search') }}" method="POST" class="w-full h-16 flex flex-wrap items-center justify-center">
+            <div class="w-full px-5 h-auto lg:px-24 pt-10 flex items-center justify-center">
+                <form action="{{ route('search') }}" method="POST" class="w-full flex flex-col md:flex-row items-center justify-center">
                     @csrf
-                    <div class="bg-white rounded border border-gray-400 mr-3">
-                        <select name="categories" class="w-64 text-center rounded-l-lg py-2 focus:ring-blue-800 focus:ring duration-300 ease-in-out">
+                    <div class="w-full bg-white rounded border border-gray-400 md:mr-3 flex flex-col items-center justify-center md:flex-row">
+                        <select name="categories" class="flex w-full md:w-80 text-center rounded-l-lg py-2 focus:ring-blue-800 focus:ring duration-300 ease-in-out">
                             <option value="none">-- Select a drink category --</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category }}" class="block px-4 py-2 text-gray-800">{{ $category }}</option>
@@ -74,17 +74,20 @@
                             <option value="No category" class="block px-4 py-2 text-gray-800">No category</option>
                             <option value="ingredient" class="block px-4 py-2 text-gray-800">-- Ingredient --</option>
                         </select>
-                        <input type="search" name="search" class="w-96 rounded-r-lg border-l border-gray-400 py-1.5 px-5 focus:ring-blue-800 focus:ring duration-300 ease-in-out" placeholder="Name of the cocktail or ingredient">
+                        <input type="search" name="search" class="flex w-full rounded-r-lg border-l border-gray-400 py-1.5 px-5 focus:ring-blue-800 focus:ring duration-300 ease-in-out" placeholder="Name of the cocktail or ingredient">
                     </div>
-                    <button type="submit" class="flex justify-center items-center text-gray-50 bg-blue-700 rounded-lg ml-3 px-4 py-[0.45rem] hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 duration-300 ease-in-out">
+                    <button type="submit" class="m-3 md:ml-3 flex justify-center items-center text-gray-50 bg-blue-700 rounded-lg px-4 py-[0.45rem] hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 duration-300 ease-in-out">
                         <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
                         </svg>    
                         <span class="pl-2">Search</span>
                     </button>
                     @if (Route::current()->getName() != 'search')
-                        <div class="bg-gray-300 w-[3px] h-5/6 rounded-full mx-10"></div>
-                        <button type="button" onclick="javascript:window.location.href='#modal' + Math.floor(Math.random()*77)" class="text-white bg-gradient-to-br from-[#d53369] to-[#daae51] font-medium rounded-lg text-sm px-5 py-3 text-center">Random drink</button>
+                        <div class="lg:bg-gray-300 lg:w-[3px] lg:h-14 lg:rounded-full lg:mx-5"></div>
+                        <button type="button" onclick="javascript:window.location.href='#modal' + Math.floor(Math.random()*77)" 
+                                class="m-3 w-48 text-white bg-gradient-to-br from-[#d53369] to-[#daae51] font-medium rounded-lg px-5 py-3 text-center">
+                            Random drink
+                        </button>
                     @endif
                 </form>
                 @if (sizeof($cocktails) < 76)
@@ -94,7 +97,7 @@
                     <a href="{{ route('home') }}" class="px-5 py-2 bg-blue-700 rounded-lg text-white mt-5 hover:bg-blue-800 duration-300 ease-in-out">Return</a>
                 @endif
             </div>
-            <div class="flex flex-wrap mx-2 lg:mx-12 mt-8">
+            <div class="flex flex-wrap mx-2 lg:mx-12 mt-5">
                 @if (sizeof($cocktails) == 0)
                     <div class="w-full h-[60vh] flex flex-col justify-center items-center">
                         <img class="w-64 h-64" src="img/ghost.svg" alt="Ghost">
@@ -199,22 +202,5 @@
                 </g>
             </g>
         </svg>
-        
-        <!-- <script>
-            var name = 'bloody mary'
-            $.ajax({
-                method: 'GET',
-                url: 'https://api.api-ninjas.com/v1/cocktail?name=' + name,
-                headers: { 'X-Api-Key': '226S4O8bs3Me60uuGe0m+A==uD37mNN5wkuUqmms'},
-                contentType: 'application/json',
-                success: function(result) {
-                    console.log(result);
-                },
-                error: function ajaxError(jqXHR) {
-                    console.error('Error: ', jqXHR.responseText);
-                }
-            });
-        </script> -->
-
     </body>
 @endsection

@@ -33,8 +33,8 @@
             <div>
                 <h2 class="my-8 text-2xl text-orange-600">Site editing</h2>
                 <p class="mb-5 ml-9">
-                    This site, accessible at the URL https://www.blog.thibaut-meslin.fr (the "Site"), is published by : <br>
-                    <i class="ml-12">Thibaut Meslin, résidant 10 rue du gué 27120 MENILLES, of French nationality (France), born on 02/11/2001, </i> 
+                    This site, accessible at the URL https://www.aperita.thibaut-meslin.fr (the "Site"), is published by : <br>
+                    <i class="ml-12">Thibaut Meslin, living 10 rue du gué 27120 MENILLES, of French nationality (France), born on 02/11/2001, </i> 
                 </p>
                 <h2 class="my-8 text-2xl text-orange-600">Hosting</h2>
                 <p class="mb-5 ml-9">

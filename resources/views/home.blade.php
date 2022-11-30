@@ -52,9 +52,10 @@
                 <div class="text-center">
                     <h1 class="sm:text-6xl text-4xl font-medium text-gray-900 mb-4" style="font-family: 'Great Vibes', cursive;">Let's get started !</h1>
                     <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">
-                        Enter the name of a cocktail, a letter or selected the ingredients you have at 
-                        home and we will show you what you can make! Or if you are not in the mood, 
-                        just click the random button and we will provide you a random cocktail!
+                        Enter the name of a cocktail, a letter and we will show you what you are looking for ! 
+                        If you are not in the mood, just click the random button and we will provide you a random cocktail! 
+                        You can search by an ingredient as well, just enter the name of the ingredient in the search bar and 
+                        select <span class="italic">"Ingredient"</span> in the drop down menu. Have a nice drink!
                     </p>
                     <div class="flex mt-6 justify-center">
                         <div class="w-32 h-[3px] rounded-full bg-blue-800 inline-flex"></div>
@@ -62,105 +63,113 @@
                 </div>
             </div>
             <div class="w-full px-24 pt-10 flex flex-col items-center justify-center">
-                <form method="POST" class="w-full h-16 flex flex-wrap items-center justify-center">
+                <form action="{{ route('search') }}" method="POST" class="w-full h-16 flex flex-wrap items-center justify-center">
                     @csrf
                     <div class="bg-white rounded border border-gray-400 mr-3">
                         <select name="categories" class="w-64 text-center rounded-l-lg py-2 focus:ring-blue-800 focus:ring duration-300 ease-in-out">
                             <option value="none">-- Select a drink category --</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category }}" class="block px-4 py-2 text-gray-800">{{ $category }}</option>
-                        @endforeach
-                            <option value="No category" class="block px-4 py-2 text-gray-800">No category</option>
-                        </select>
-                        <input type="search" name="name" class="w-96 rounded-r-lg border-l border-gray-400 py-1.5 px-5 focus:ring-blue-800 focus:ring duration-300 ease-in-out" placeholder="Name of the cocktail">
-                    </div>
-                    <div class="checkbox-dropdown mr-3">
-                        Choose ingredient(s)
-                        <ul name="ingredients" class="checkbox-dropdown-list">
-                            @foreach ($ingredients as $ingredient)
-                            <li class="flex items-center border-b border-gray-400">
-                                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                <label for="check" class="w-full">{{ $ingredient }}</label>
-                            </li>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category }}" class="block px-4 py-2 text-gray-800">{{ $category }}</option>
                             @endforeach
-                        </ul>
+                            <option value="No category" class="block px-4 py-2 text-gray-800">No category</option>
+                            <option value="ingredient" class="block px-4 py-2 text-gray-800">-- Ingredient --</option>
+                        </select>
+                        <input type="search" name="search" class="w-96 rounded-r-lg border-l border-gray-400 py-1.5 px-5 focus:ring-blue-800 focus:ring duration-300 ease-in-out" placeholder="Name of the cocktail or ingredient">
                     </div>
-                    <button type="submit" class="flex justify-center items-center text-gray-50 bg-blue-700 rounded-lg px-4 py-[0.45rem] hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 duration-300 ease-in-out">
+                    <button type="submit" class="flex justify-center items-center text-gray-50 bg-blue-700 rounded-lg ml-3 px-4 py-[0.45rem] hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 duration-300 ease-in-out">
                         <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
                         </svg>    
                         <span class="pl-2">Search</span>
                     </button>
-                    <div class="bg-gray-300 w-[3px] h-5/6 rounded-full mx-10"></div>
-                    <button type="button" onclick="javascript:window.location.href='#modal' + Math.floor(Math.random()*77)" class="text-white bg-gradient-to-br from-[#d53369] to-[#daae51] font-medium rounded-lg text-sm px-5 py-3 text-center">Random drink</button>
+                    @if (Route::current()->getName() != 'search')
+                        <div class="bg-gray-300 w-[3px] h-5/6 rounded-full mx-10"></div>
+                        <button type="button" onclick="javascript:window.location.href='#modal' + Math.floor(Math.random()*77)" class="text-white bg-gradient-to-br from-[#d53369] to-[#daae51] font-medium rounded-lg text-sm px-5 py-3 text-center">Random drink</button>
+                    @endif
                 </form>
+                @if (sizeof($cocktails) < 76)
+                    <div class="flex mt-5 justify-center">
+                        <div class="w-32 h-[3px] rounded-full bg-gray-400 inline-flex"></div>
+                    </div>
+                    <a href="{{ route('home') }}" class="px-5 py-2 bg-blue-700 rounded-lg text-white mt-5 hover:bg-blue-800 duration-300 ease-in-out">Return</a>
+                @endif
             </div>
             <div class="flex flex-wrap mx-2 lg:mx-12 mt-8">
-                @foreach ($cocktails as $id => $cocktail)
-                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-                    <div class="h-full flex items-center bg-stone-200 border-gray-300 border p-4 rounded-lg">
-                        <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" 
-                                src="img/glass/{{ App\Http\Controllers\AppController::selectGlass($cocktail['glass']) }}.svg">
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 font-semibold">{{ $cocktail['name'] }}</h2>
-                            <p class="text-gray-500 italic">{{ isset($cocktail['category']) ? $cocktail['category'] : 'No category' }}</p>
-                        </div>
-                        <a href="#modal{{ $id }}" class="pl-2">
-                            <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            class="p-2 w-16 h-16 object-cover object-center flex-shrink-0 bg-stone-300
-                                        border border-gray-400 hover:ring hover:ring-opacity-40 hover:ring-blue-800 rounded-lg 
-                                        duration-300 ease-in-out hover:text-blue-800">
-                                <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M4.5 1C4.22386 1 4 1.22386 4 1.5C4 1.77614 4.22386 2 4.5 2H12V13H4.5C4.22386 13 4 13.2239 4 13.5C4 13.7761 4.22386 14 4.5 14H12C12.5523 14 13 13.5523 13 13V2C13 1.44772 12.5523 1 12 1H4.5ZM6.60355 4.89645C6.40829 4.70118 6.09171 4.70118 5.89645 4.89645C5.70118 5.09171 5.70118 5.40829 5.89645 5.60355L7.29289 7H0.5C0.223858 7 0 7.22386 0 7.5C0 7.77614 0.223858 8 0.5 8H7.29289L5.89645 9.39645C5.70118 9.59171 5.70118 9.90829 5.89645 10.1036C6.09171 10.2988 6.40829 10.2988 6.60355 10.1036L8.85355 7.85355C9.04882 7.65829 9.04882 7.34171 8.85355 7.14645L6.60355 4.89645Z"
-                                    fill="currentColor"/>
-                            </svg>
-                        </a>
-                        <!-- The Modal -->
-                        <div class="popup" id="modal{{ $id }}">
-                            <a class="popup__overlay" href="#browse"></a>
-                            <div class="popup__wrapper flex items-center justify-center h-[98%] lg:h-4/5 overflow-y-auto">
-                                <a class="popup__close w-10 h-10 flex items-center justify-center text-white 
-                                            bg-blue-800 rounded-full hover:bg-blue-900 duration-300 ease-in-out" href="#browse">X</a>
-                                <div>
-                                    <div class="flex flex-wrap -m-4 px-2">
-                                        <div class="p-4 md:w-1/3 w-full flex items-center justify-center">
-                                            <img alt="team" class="w-32 h-32 md:w-full lg:h-full bg-gray-100 object-cover object-center flex-shrink-0 rounded-full" 
-                                                src="img/glass/{{ App\Http\Controllers\AppController::selectGlass($cocktail['glass']) }}.svg">
-                                        </div>
-                                        <div class="p-4 md:w-1/3 w-full border-gray-300 border-b md:border-r md:border-b-0">
-                                            <div class="h-full flex flex-col items-center justify-center">
-                                                <h1 class="text-gray-900 text-6xl font-semibold" style="font-family: 'Great Vibes', cursive;">{{ $cocktail['name'] }}</h1>
-                                                <h2 class="text-gray-900 italic opacity-75 -mt-2 mb-4">{{ isset($cocktail['category']) ? $cocktail['category'] : '' }}</h2>
-                                                <p class="leading-relaxed text-base mb-5">{{ ucfirst($cocktail['glass']) }} glass</p>
+                @if (sizeof($cocktails) == 0)
+                    <div class="w-full h-[60vh] flex flex-col justify-center items-center">
+                        <img class="w-64 h-64" src="img/ghost.svg" alt="Ghost">
+                        <p class="text-center mt-5 text-gray-900 text-lg">
+                            Seems like there is nothing here...
+                            <br>Try searching again with different keywords.
+                        </p>
+                    </div>
+                @else
+                    @foreach ($cocktails as $id => $cocktail)
+                    <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                        <div class="h-full flex items-center bg-stone-200 border-gray-300 border p-4 rounded-lg">
+                            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" 
+                                    src="img/glass/{{ App\Http\Controllers\AppController::selectGlass($cocktail['glass']) }}.svg">
+                            <div class="flex-grow">
+                                <h2 class="text-gray-900 font-semibold">{{ $cocktail['name'] }}</h2>
+                                <p class="text-gray-500 italic">{{ isset($cocktail['category']) ? $cocktail['category'] : 'No category' }}</p>
+                            </div>
+                            <a href="#modal{{ $id }}" class="pl-2">
+                                <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                class="p-2 w-16 h-16 object-cover object-center flex-shrink-0 bg-stone-300
+                                            border border-gray-400 hover:ring hover:ring-opacity-40 hover:ring-blue-800 rounded-lg 
+                                            duration-300 ease-in-out hover:text-blue-800">
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M4.5 1C4.22386 1 4 1.22386 4 1.5C4 1.77614 4.22386 2 4.5 2H12V13H4.5C4.22386 13 4 13.2239 4 13.5C4 13.7761 4.22386 14 4.5 14H12C12.5523 14 13 13.5523 13 13V2C13 1.44772 12.5523 1 12 1H4.5ZM6.60355 4.89645C6.40829 4.70118 6.09171 4.70118 5.89645 4.89645C5.70118 5.09171 5.70118 5.40829 5.89645 5.60355L7.29289 7H0.5C0.223858 7 0 7.22386 0 7.5C0 7.77614 0.223858 8 0.5 8H7.29289L5.89645 9.39645C5.70118 9.59171 5.70118 9.90829 5.89645 10.1036C6.09171 10.2988 6.40829 10.2988 6.60355 10.1036L8.85355 7.85355C9.04882 7.65829 9.04882 7.34171 8.85355 7.14645L6.60355 4.89645Z"
+                                        fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <!-- The Modal -->
+                            <div class="popup" id="modal{{ $id }}">
+                                <a class="popup__overlay" href="#browse"></a>
+                                <div class="popup__wrapper flex items-center justify-center h-[98%] lg:h-4/5 overflow-y-auto">
+                                    <a class="popup__close w-10 h-10 flex items-center justify-center text-white 
+                                                bg-blue-800 rounded-full hover:bg-blue-900 duration-300 ease-in-out" href="#browse">X</a>
+                                    <div>
+                                        <div class="flex flex-wrap -m-4 px-2">
+                                            <div class="p-4 md:w-1/3 w-full flex items-center justify-center">
+                                                <img alt="team" class="w-32 h-32 md:w-full lg:h-full bg-gray-100 object-cover object-center flex-shrink-0 rounded-full" 
+                                                    src="img/glass/{{ App\Http\Controllers\AppController::selectGlass($cocktail['glass']) }}.svg">
                                             </div>
-                                        </div>
-                                        <div class="p-4 md:w-1/3 w-full md:pl-6">
-                                            <div class="h-full pt-2">
-                                                <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Ingredients :</h2>
-                                                <ul class="list-disc list-inside ml-5 mb-5">
-                                                    @foreach ($cocktail['ingredients'] as $ingredient)
-                                                        @if (isset($ingredient['amount']) && isset($ingredient['unit']) && isset($ingredient['ingredient']))
-                                                            <li class="text-gray-800 mb-1">
-                                                                {{ $ingredient['amount'] }} {{ $ingredient['unit'] }} of {{ $ingredient['ingredient'] }} 
-                                                                <span class="italic">{{ isset($ingredient['label']) ? '('.$ingredient['label'].')' : '' }}</span>
-                                                            </li>
-                                                        @elseif (isset($ingredient['special']))
-                                                            <li class="text-gray-800 mb-1">{{ $ingredient['special'] }}</li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                                @if (isset($cocktail['garnish']))
-                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Garnish :</h2>
+                                            <div class="p-4 md:w-1/3 w-full border-gray-300 border-b md:border-r md:border-b-0">
+                                                <div class="h-full flex flex-col items-center justify-center">
+                                                    <h1 class="text-gray-900 text-6xl font-semibold" style="font-family: 'Great Vibes', cursive;">{{ $cocktail['name'] }}</h1>
+                                                    <h2 class="text-gray-900 italic opacity-75 -mt-2 mb-4">{{ isset($cocktail['category']) ? $cocktail['category'] : '' }}</h2>
+                                                    <p class="leading-relaxed text-base mb-5">{{ ucfirst($cocktail['glass']) }} glass</p>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 md:w-1/3 w-full md:pl-6">
+                                                <div class="h-full pt-2">
+                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Ingredients :</h2>
                                                     <ul class="list-disc list-inside ml-5 mb-5">
-                                                        <li class="text-gray-800 mb-1">{{ $cocktail['garnish'] }}</li>
+                                                        @foreach ($cocktail['ingredients'] as $ingredient)
+                                                            @if (isset($ingredient['amount']) && isset($ingredient['unit']) && isset($ingredient['ingredient']))
+                                                                <li class="text-gray-800 mb-1">
+                                                                    {{ $ingredient['amount'] }} {{ $ingredient['unit'] }} of {{ $ingredient['ingredient'] }} 
+                                                                    <span class="italic">{{ isset($ingredient['label']) ? '('.$ingredient['label'].')' : '' }}</span>
+                                                                </li>
+                                                            @elseif (isset($ingredient['special']))
+                                                                <li class="text-gray-800 mb-1">{{ $ingredient['special'] }}</li>
+                                                            @endif
+                                                        @endforeach
                                                     </ul>
-                                                @endif
-                                                @if (isset($cocktail['preparation']))
-                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Preparation :</h2>
-                                                    <p class="leading-relaxed text-base mb-5">{{ $cocktail['preparation'] }}</p>
-                                                @endif
+                                                    @if (isset($cocktail['garnish']))
+                                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Garnish :</h2>
+                                                        <ul class="list-disc list-inside ml-5 mb-5">
+                                                            <li class="text-gray-800 mb-1">{{ $cocktail['garnish'] }}</li>
+                                                        </ul>
+                                                    @endif
+                                                    @if (isset($cocktail['preparation']))
+                                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-2 underline decoration-blue-800">Preparation :</h2>
+                                                        <p class="leading-relaxed text-base mb-5">{{ $cocktail['preparation'] }}</p>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -168,8 +177,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </section>
 
@@ -190,16 +199,6 @@
                 </g>
             </g>
         </svg>
-
-        <script>
-            $(".checkbox-dropdown").click(function () {
-                $(this).toggleClass("is-active");
-            });
-
-            $(".checkbox-dropdown ul").click(function(e) {
-                e.stopPropagation();
-            });
-        </script>
         
         <!-- <script>
             var name = 'bloody mary'

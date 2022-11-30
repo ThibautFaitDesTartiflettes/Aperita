@@ -13,8 +13,7 @@ class AppController extends Controller
     {
         $cocktails = $this->sortJson(storage_path('app/public/cocktails.json'), 'name');
         $categories = array_unique(array_column($cocktails, 'category'));
-        $ingredients = $this->getIngredients($cocktails);
-        return view('home', compact('cocktails', 'categories', 'ingredients'));
+        return view('home', compact('cocktails', 'categories'));
     }
 
     public function sortJson($path, $member = null)
@@ -31,20 +30,62 @@ class AppController extends Controller
         return $data;
     }
 
-    public function getIngredients($cocktails)
+    public function search(Request $request)
     {
-        $ingredients = [];
-        foreach ($cocktails as $cocktail) {
-            foreach ($cocktail['ingredients'] as $ingredient) {
-                if (isset($ingredient['ingredient'])) {
-                    $ingredients[] = $ingredient['ingredient'];
+        $cocktails = [];
+        $categories = array_unique(array_column($this->sortJson(storage_path('app/public/cocktails.json'), 'name'), 'category'));
+
+        $search = $request->input('search');
+        $category = $request->input('categories');
+
+        ($category == 'none') ? $cocktails = $this->filterCocktails($search) : $cocktails = $this->filterCocktails($search, $category);
+
+        return view('home', compact('cocktails', 'categories'))->with('#browse');
+    }
+
+    public function filterCocktails($name, $category = null)
+    {
+        $cocktails = $this->sortJson(storage_path('app/public/cocktails.json'), 'name');
+        $results = [];
+
+        if ($category != null) {
+            if ($category == 'ingredient') {
+                foreach ($cocktails as $cocktail) {
+                    foreach ($cocktail['ingredients'] as $ingredient) {
+                        if (isset($ingredient['ingredient'])) {
+                            if (strpos(strtolower($ingredient['ingredient']), strtolower($name)) !== false) {
+                                $results[] = $cocktail;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ($name != "") {
+                    foreach ($cocktails as $cocktail) {
+                        if (strpos(strtolower($cocktail['name']), strtolower($name)) !== false && $cocktail['category'] == $category) {
+                            $results[] = $cocktail;
+                        }
+                    }
+                } else {
+                    foreach ($cocktails as $cocktail) {
+                        if (isset($cocktail['category']) && $cocktail['category'] == $category) {
+                            $results[] = $cocktail;
+                        }
+                    }
+                }
+            }
+        } else {
+            foreach ($cocktails as $cocktail) {
+                if (strpos(strtolower($cocktail['name']), strtolower($name)) !== false) {
+                    $results[] = $cocktail;
                 }
             }
         }
-        return array_unique($ingredients);
+        return $results;
     }
 
-    static function selectGlass($glass) {
+    static function selectGlass($glass) 
+    {
         switch ($glass) {
             case 'highball':
                 return 'highball';

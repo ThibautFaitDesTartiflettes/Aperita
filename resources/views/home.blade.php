@@ -91,10 +91,8 @@
                     @endif
                 </form>
                 @if (sizeof($cocktails) < 76)
-                    <div class="flex mt-5 justify-center">
-                        <div class="w-32 h-[3px] rounded-full bg-gray-400 inline-flex"></div>
-                    </div>
-                    <a href="{{ route('home') }}" class="px-5 py-2 bg-blue-700 rounded-lg text-white mt-5 hover:bg-blue-800 duration-300 ease-in-out">Return</a>
+                    <div class="lg:bg-gray-300 lg:w-[3px] lg:h-14 lg:rounded-full lg:mx-5"></div>
+                    <a href="{{ route('home') }}" class="px-5 py-2 bg-blue-700 rounded-lg text-white hover:bg-blue-800 duration-300 ease-in-out">Return</a>
                 @endif
             </div>
             <div class="flex flex-wrap mx-2 lg:mx-12 mt-5">

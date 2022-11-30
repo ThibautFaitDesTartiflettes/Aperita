@@ -11,7 +11,7 @@ class AppController extends Controller
 {
     public function index()
     {
-        $cocktails = $this->sortJson(storage_path('app/public/cocktails.json'), 'name');
+        $cocktails = $this->sortJson('cocktails.json', 'name');
         $categories = array_unique(array_column($cocktails, 'category'));
         return view('home', compact('cocktails', 'categories'));
     }
@@ -38,7 +38,7 @@ class AppController extends Controller
     public function search(Request $request)
     {
         $cocktails = [];
-        $categories = array_unique(array_column($this->sortJson(storage_path('app/public/cocktails.json'), 'name'), 'category'));
+        $categories = array_unique(array_column($this->sortJson('cocktails.json', 'name'), 'category'));
 
         $search = $request->input('search');
         $category = $request->input('categories');
@@ -50,7 +50,7 @@ class AppController extends Controller
 
     public function filterCocktails($name, $category = null)
     {
-        $cocktails = $this->sortJson(storage_path('app/public/cocktails.json'), 'name');
+        $cocktails = $this->sortJson('cocktails.json', 'name');
         $results = [];
 
         if ($category != null) {
